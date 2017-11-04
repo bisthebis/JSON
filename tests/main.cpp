@@ -1,6 +1,8 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
+#include "lib.h"
+
 
 TEST_CASE("Dummy", "[dummy]") {
-    REQUIRE (5*5 == 25);
+    REQUIRE (square(7) == 49);
 }
