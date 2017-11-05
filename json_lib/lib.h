@@ -49,6 +49,7 @@ public:
     const JsonObject& toObject() const;
 
     //Constructors
+    JsonValue();
     JsonValue(const std::string& val);
     JsonValue(double val);
     JsonValue(bool val);

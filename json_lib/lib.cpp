@@ -31,7 +31,7 @@ class JsonValue_Impl {
 private:
     friend class JsonValue;
     using null = decltype(nullptr);
-    boost::variant<std::string, double, bool, null, JsonObject, JsonArray> value;
+    boost::variant<null, double, bool, std::string, JsonObject, JsonArray> value;
 
 public:
     JsonValue_Impl(const std::string& val) {value = val;}
@@ -52,7 +52,7 @@ public:
 
 bool JsonValue::isString() const {
     auto type = ptr->type();
-    return  type == 0;
+    return  type == 3;
 }
 
 bool JsonValue::isNumber() const {
@@ -67,7 +67,7 @@ bool JsonValue::isBool() const {
 
 bool JsonValue::isNull() const {
     auto type = ptr->type();
-    return  type == 3;
+    return  type == 0;
 }
 
 bool JsonValue::isObject() const {
@@ -80,6 +80,7 @@ bool JsonValue::isArray() const {
     return  type == 5;
 }
 
+JsonValue::JsonValue()                          :   ptr(new JsonValue_Impl(nullptr)) {}
 JsonValue::JsonValue(const std::string &val)    :   ptr(new JsonValue_Impl(val)) {}
 JsonValue::JsonValue(double val)                :   ptr(new JsonValue_Impl(val)) {}
 JsonValue::JsonValue(bool val)                  :   ptr(new JsonValue_Impl(val)) {}

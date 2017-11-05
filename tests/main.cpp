@@ -4,49 +4,49 @@
 
 
 TEST_CASE("Dummy", "[dummy]") {
-    REQUIRE (doVariantTest());
+    CHECK (doVariantTest());
 }
 
 TEST_CASE("JsonValue evaluates types corectly", "[JsonValue]") {
 
     JsonValue val (std::string("Hello world !"));
-    REQUIRE(val.isString());
-    REQUIRE_FALSE(val.isNumber());
-    REQUIRE_FALSE(val.isBool());
-    REQUIRE_FALSE(val.isNull());
-    REQUIRE_FALSE(val.isObject());
-    REQUIRE_FALSE(val.isArray());
+    CHECK(val.isString());
+    CHECK_FALSE(val.isNumber());
+    CHECK_FALSE(val.isBool());
+    CHECK_FALSE(val.isNull());
+    CHECK_FALSE(val.isObject());
+    CHECK_FALSE(val.isArray());
 
     val = nullptr;
-    REQUIRE_FALSE(val.isString());
-    REQUIRE_FALSE(val.isNumber());
-    REQUIRE_FALSE(val.isBool());
-    REQUIRE(val.isNull());
-    REQUIRE_FALSE(val.isObject());
-    REQUIRE_FALSE(val.isArray());
+    CHECK_FALSE(val.isString());
+    CHECK_FALSE(val.isNumber());
+    CHECK_FALSE(val.isBool());
+    CHECK(val.isNull());
+    CHECK_FALSE(val.isObject());
+    CHECK_FALSE(val.isArray());
 
     val = 5.0;
-    REQUIRE_FALSE(val.isString());
-    REQUIRE(val.isNumber());
-    REQUIRE_FALSE(val.isBool());
-    REQUIRE_FALSE(val.isNull());
-    REQUIRE_FALSE(val.isObject());
-    REQUIRE_FALSE(val.isArray());
+    CHECK_FALSE(val.isString());
+    CHECK(val.isNumber());
+    CHECK_FALSE(val.isBool());
+    CHECK_FALSE(val.isNull());
+    CHECK_FALSE(val.isObject());
+    CHECK_FALSE(val.isArray());
 
     val = false;
-    REQUIRE_FALSE(val.isString());
-    REQUIRE_FALSE(val.isNumber());
-    REQUIRE(val.isBool());
-    REQUIRE_FALSE(val.isNull());
-    REQUIRE_FALSE(val.isObject());
-    REQUIRE_FALSE(val.isArray());
+    CHECK_FALSE(val.isString());
+    CHECK_FALSE(val.isNumber());
+    CHECK(val.isBool());
+    CHECK_FALSE(val.isNull());
+    CHECK_FALSE(val.isObject());
+    CHECK_FALSE(val.isArray());
 }
 
 TEST_CASE("JsonValue throws if and only if bad conversion happen. (Non-const version)", "[JsonValue]") {
     JsonValue val = false;
-    REQUIRE_THROWS(val.toString());
-    REQUIRE_THROWS(val.toNull());
-    //REQUIRE_THROWS()
+    CHECK_THROWS(val.toString());
+    CHECK_THROWS(val.toNull());
+    //CHECK_THROWS()
 }
 
 TEST_CASE("JsonValue throws if and only if bad conversion happen. (Const version)", "[JsonValue]") {
@@ -54,6 +54,11 @@ TEST_CASE("JsonValue throws if and only if bad conversion happen. (Const version
 
     JsonValue val = false;
     const JsonValue& ref = val;
-    REQUIRE_THROWS(ref.toString());
-    //REQUIRE_THROWS()
+    CHECK_THROWS(ref.toString());
+    //CHECK_THROWS()
+}
+
+TEST_CASE("JsonValue is default-constructed as Null", "[JsoNValue]") {
+    JsonValue val;
+    CHECK(val.isNull());
 }
