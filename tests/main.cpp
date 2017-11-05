@@ -41,3 +41,19 @@ TEST_CASE("JsonValue evaluates types corectly", "[JsonValue]") {
     REQUIRE_FALSE(val.isObject());
     REQUIRE_FALSE(val.isArray());
 }
+
+TEST_CASE("JsonValue throws if and only if bad conversion happen. (Non-const version)", "[JsonValue]") {
+    JsonValue val = false;
+    REQUIRE_THROWS(val.toString());
+    REQUIRE_THROWS(val.toNull());
+    //REQUIRE_THROWS()
+}
+
+TEST_CASE("JsonValue throws if and only if bad conversion happen. (Const version)", "[JsonValue]") {
+    //No need to check for toNull : already covered in the non const version
+
+    JsonValue val = false;
+    const JsonValue& ref = val;
+    REQUIRE_THROWS(ref.toString());
+    //REQUIRE_THROWS()
+}

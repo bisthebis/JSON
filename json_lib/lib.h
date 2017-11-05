@@ -21,12 +21,34 @@ private:
     JsonValue_Impl* ptr;
 
 public:
+    //Type checkers
     bool isString() const;
     bool isNumber() const;
     bool isBool()   const;
     bool isNull()   const;
     bool isObject() const;
     bool isArray()  const;
+
+    //Accessors & their const counterpart. Throws std::runtime error if type is wrong !
+    std::string& toString();
+    const std::string& toString() const;
+
+    double& toNumber();
+    double toNumber() const;
+
+    bool& toBool();
+    bool toBool() const;
+    explicit operator bool() const {return toBool();}
+
+    std::nullptr_t toNull() const;
+
+    JsonArray& toArray();
+    const JsonArray& toArray() const;
+
+    JsonObject& toObject();
+    const JsonObject& toObject() const;
+
+    //Constructors
     JsonValue(const std::string& val);
     JsonValue(double val);
     JsonValue(bool val);

@@ -1,5 +1,6 @@
 #include "lib.h"
 #include <boost/variant.hpp>
+#include <stdexcept>
 
 extern bool doVariantTest() {
     using boost::variant;
@@ -28,6 +29,7 @@ extern bool doVariantTest() {
 class JsonValue_Impl {
     //Either a primitive (string, double, bool, null = nullptr), an object or an array
 private:
+    friend class JsonValue;
     using null = decltype(nullptr);
     boost::variant<std::string, double, bool, null, JsonObject, JsonArray> value;
 
@@ -85,3 +87,23 @@ JsonValue::JsonValue(decltype(nullptr) n)       :   ptr(new JsonValue_Impl(nullp
 JsonValue::JsonValue(const JsonArray &val)      :   ptr(new JsonValue_Impl(val)) {}
 JsonValue::JsonValue(const JsonObject &val)     :   ptr(new JsonValue_Impl(val)) {}
 JsonValue::~JsonValue()  {delete ptr;}
+
+
+std::string& JsonValue::toString() {
+    if (!isString())
+        throw std::runtime_error("Called JsonValue::toString() on a non-string value");
+    return boost::get<std::string>(ptr->value);
+}
+
+const std::string& JsonValue::toString() const {
+    if (!isString())
+        ;//throw std::runtime_error("Called JsonValue::toString() on a non-string value");
+    return boost::get<std::string>(ptr->value);
+}
+
+decltype(nullptr) JsonValue::toNull() const {
+    if (!isNull())
+        throw std::runtime_error("Called JsonValue::toNull() on a non-null value");
+    return nullptr;
+}
+
