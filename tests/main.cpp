@@ -4,5 +4,5 @@
 
 
 TEST_CASE("Dummy", "[dummy]") {
-    REQUIRE (square(7) == 49);
+    REQUIRE (doVariantTest());
 }

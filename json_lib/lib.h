@@ -1,6 +1,6 @@
 #ifndef JSON_LIB_MAIN_FILE
 #define JSON_LIB_MAIN_FILE
 
-extern unsigned int square(unsigned int);
+extern bool doVariantTest();
 
-#endif JSON_LIB_MAIN_FILE
+#endif //JSON_LIB_MAIN_FILE
