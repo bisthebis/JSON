@@ -98,7 +98,7 @@ std::string& JsonValue::toString() {
 
 const std::string& JsonValue::toString() const {
     if (!isString())
-        ;//throw std::runtime_error("Called JsonValue::toString() on a non-string value");
+        throw std::runtime_error("Called JsonValue::toString() on a non-string value");
     return boost::get<std::string>(ptr->value);
 }
 
@@ -106,5 +106,53 @@ decltype(nullptr) JsonValue::toNull() const {
     if (!isNull())
         throw std::runtime_error("Called JsonValue::toNull() on a non-null value");
     return nullptr;
+}
+
+double& JsonValue::toNumber() {
+    if (!isNumber())
+        throw std::runtime_error("Called JsonValue::toNumber() on a non-number value");
+    return boost::get<double>(ptr->value);
+}
+
+double JsonValue::toNumber() const {
+    if (!isNumber())
+        throw std::runtime_error("Called JsonValue::toNumber() on a non-number value");
+    return boost::get<double>(ptr->value);
+}
+
+bool& JsonValue::toBool() {
+    if (!isBool())
+        throw std::runtime_error("Called JsonValue::toBool() on a non-boolean value");
+    return boost::get<bool>(ptr->value);
+}
+
+bool JsonValue::toBool() const {
+    if (!isBool())
+        throw std::runtime_error("Called JsonValue::toBool() on a non-boolean value");
+    return boost::get<bool>(ptr->value);
+}
+
+JsonArray& JsonValue::toArray() {
+    if (!isArray())
+        throw std::runtime_error("Called JsonValue::toArray() on a non-array value");
+    return boost::get<JsonArray>(ptr->value);
+}
+
+const JsonArray& JsonValue::toArray() const {
+    if (!isArray())
+        throw std::runtime_error("Called JsonValue::toArray() on a non-array value");
+    return boost::get<JsonArray>(ptr->value);
+}
+
+JsonObject& JsonValue::toObject() {
+    if (!isArray())
+        throw std::runtime_error("Called JsonValue::toObject() on a non-object value");
+    return boost::get<JsonArray>(ptr->value);
+}
+
+const JsonObject& JsonValue::toObject() const {
+    if (!isArray())
+        throw std::runtime_error("Called JsonValue::toObject() on a non-object value");
+    return boost::get<JsonObject>(ptr->value);
 }
 

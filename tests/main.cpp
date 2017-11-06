@@ -55,7 +55,8 @@ TEST_CASE("JsonValue throws if and only if bad conversion happen. (Const version
     JsonValue val = false;
     const JsonValue& ref = val;
     CHECK_THROWS(ref.toString());
-    //CHECK_THROWS()
+    CHECK_THROWS(ref.toNumber());
+    CHECK_NOTHROW(ref.toBool());
 }
 
 TEST_CASE("JsonValue is default-constructed as Null", "[JsoNValue]") {
