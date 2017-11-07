@@ -44,9 +44,7 @@ public:
 
 };
 
-struct JsonArray {
-    JsonArray() = default;
-};
+using JsonArray = std::vector<JsonObject>; //Why make it complicated ?
 
 class JsonValue {
 private:
