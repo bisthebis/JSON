@@ -23,7 +23,7 @@ SOFTWARE.
 */
 
 #include "catch.hpp"
-#include "jsonvalue.h"
+#include "json_types.h"
 
 TEST_CASE("JsonValue evaluates types corectly", "[JsonValue]") {
 

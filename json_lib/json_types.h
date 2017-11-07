@@ -37,7 +37,7 @@ private:
     std::map<std::string, JsonValue> data;
 
 public:
-    JsonObject() {}
+    JsonObject() = default;
     JsonValue& operator [](const std::string& index) noexcept; //If not found, create a default null value (normal behavior of std::map)
     auto find(const std::string& index) const noexcept -> decltype(data.cbegin());
     auto find(const std::string& index) noexcept -> decltype(data.begin());
@@ -45,7 +45,7 @@ public:
 };
 
 struct JsonArray {
-    JsonArray() {}
+    JsonArray() = default;
 };
 
 class JsonValue {
