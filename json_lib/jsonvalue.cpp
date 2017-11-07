@@ -154,3 +154,15 @@ const JsonObject& JsonValue::toObject() const {
         throw std::runtime_error("Called JsonValue::toObject() on a non-object value");
     return boost::get<JsonObject>(ptr->value);
 }
+
+JsonValue& JsonObject::operator [](const std::string& index) noexcept {
+    return data[index];
+}
+
+auto JsonObject::find(const std::string &index) const noexcept -> decltype(data.cbegin()) {
+    return data.find(index);
+}
+
+auto JsonObject::find(const std::string &index) noexcept -> decltype(data.begin()) {
+    return data.find(index);
+}
