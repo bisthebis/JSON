@@ -1,6 +1,6 @@
 include_directories(${CMAKE_SOURCE_DIR})
 
-set (SOURCE lib.cpp)
+set (SOURCE lib.cpp lib.h jsonvalue.cpp jsonvalue.h)
 
 find_package(Boost 1.65)
 if(Boost_FOUND)
